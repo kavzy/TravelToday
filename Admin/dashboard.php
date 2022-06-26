@@ -1,3 +1,15 @@
+<?php
+    session_start();
+    if(!(isset($_SESSION['role_id'])) && !(isset($_SESSION['username']))){
+        header("location:../index.php");
+    }
+    if ($_SESSION['role_id'] != 1) {
+        header("location:../index.php");
+    }  
+
+    $user = $_SESSION['username'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,14 +142,14 @@
                                 <div class="avatar me-1">
                                     <img src="../assets/images/avatar/avatar-s-1.png" alt="" srcset="">
                                 </div>
-                                <div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
+                                <div class="d-none d-md-block d-lg-inline-block"><?php echo $user; ?></div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
                                 <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
                                 <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" href="logout.php"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>

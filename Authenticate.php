@@ -1,7 +1,5 @@
 <?php
     include './Database.php';
-    require_once './vendor/autoload.php';
-    require_once './constants.php';
 
     class Authenticate
     {
@@ -35,9 +33,9 @@
                     $_SESSION['is_logged'] = TRUE;
 
                     if($current_user['role_id'] == 1){
-                        header("Location: /Admin/dashboard.php");
+                        header("Location: Admin/dashboard.php");
                     }elseif($current_user['role_id'] == 2){
-                        header("Location: /Customer/dashboard.php");
+                        header("Location: Customer/dashboard.php");
                     }else{
                         header("Location: denied.php");
                         die;

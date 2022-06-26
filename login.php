@@ -24,7 +24,7 @@
                         <img src="img/logo.png" height="48" class='mb-4'>
                         <h3>Login</h3>
                         <p>Please sign in to continue to Travel Today.</p>
-                        <a href="index.html"><i data-feather="arrow-left" width="20"></i> Back to home</a>
+                        <a href="index.php"><i data-feather="arrow-left" width="20"></i> Back to home</a>
                     </div>
                     <?php $auth = new Authenticate(); ?>
                     <?php if(isset($_POST['username']) || isset($_POST['password'])): ?>

@@ -66,41 +66,51 @@
                 <table class='table table-striped' id="table1">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>City</th>
+                            <th>Booking ID</th>
+                            <th>Package ID</th>
+                            <th>Total Adult</th>
+                            <th>Total Children</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Total</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                         require_once '../Database.php';
+                         $connect = new Database();
+                         $userid = $_SESSION['id'];
+                         $db = $connect->db();
+                         $sql = "SELECT * FROM bookings WHERE customer_id = $userid";
+                         $result = mysqli_query($db, $sql);
+                         $books = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                    ?>
+                    <?php foreach ($books as $book): ?>
+                        <?php
+                            if($book['status'] == 0){
+                                $status = '<span class="badge bg-danger">waiting for approval</span>';
+                            }else if($book['status'] == 1){
+                                $status = '<span class="badge bg-warning">waiting for payment</span>';
+                            }else if($book['status'] == 2){
+                                $status = '<span class="badge bg-success">success</span>';
+                            }else{
+                                $status = 'not found';
+                            }
+                        ?>
                         <tr>
-                            <td>Graiden</td>
-                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                            <td>076 4820 8838</td>
-                            <td>Offenburg</td>
+                            <td><?php echo $book['id']; ?></td>
+                            <td><?php echo $book['package_id']; ?></td>
+                            <td><?php echo $book['total_adult']; ?></td>
+                            <td><?php echo $book['total_child']; ?></td>
+                            <td><?php echo $book['checkin']; ?></td>
+                            <td><?php echo $book['checkout']; ?></td>
+                            <td>$ <?php echo $book['total']; ?></td>
                             <td>
-                                <span class="badge bg-success">Active</span>
+                            <?php echo $status; ?>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Dale</td>
-                            <td>fringilla.euismod.enim@quam.ca</td>
-                            <td>0500 527693</td>
-                            <td>New Quay</td>
-                            <td>
-                                <span class="badge bg-success">Active</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Nathaniel</td>
-                            <td>mi.Duis@diam.edu</td>
-                            <td>(012165) 76278</td>
-                            <td>Grumo Appula</td>
-                            <td>
-                                <span class="badge bg-danger">Inactive</span>
-                            </td>
-                        </tr>
+                    <?php endforeach;?>
                     </tbody>
                 </table>
             </div>

@@ -60,7 +60,7 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                Approval Pending Bookings | <a href="pending_payments.php" class="btn rounded btn-info">Pending Payment Bookings</a> | <a href="completed_bookings.php" class="btn rounded btn-success">Completed Bookings</a> 
+            <a href="dashboard.php" class="btn rounded btn-secondary">Approval Pending Bookings</a> | <a href="pending_payments.php" class="btn rounded btn-info">Pending Payment Bookings</a>| Completed Bookings
             </div>
             <div class="card-body">
                 <table class='table table-striped' id="table1">
@@ -75,7 +75,6 @@
                             <th>Total</th>
                             <th>Status</th>
                             <th>Action</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,7 +83,7 @@
                          $connect = new Database();
                          $userid = $_SESSION['id'];
                          $db = $connect->db();
-                         $sql = "SELECT * FROM bookings WHERE status = 0";
+                         $sql = "SELECT * FROM bookings WHERE status = 2";
                          $result = mysqli_query($db, $sql);
                          $books = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     ?>
@@ -114,9 +113,6 @@
                             <td>
                             <a href="view_customer.php?id=<?php echo $book['customer_id']; ?>" class="btn btn-secondary">View Customer Details</a>
                             </td>
-                            <td>
-                            <a href="dashboard.php?approve=1&id=<?php echo $book['id']; ?>" class="btn btn-primary">Approve</a>
-                            </td>
                         </tr>
                     <?php endforeach;?>
                     </tbody>
@@ -138,18 +134,18 @@
            if(isset($_GET['success']))
            {
                echo'<script>
-                       swal("Approved Success!", "success!", "success");
+                       swal("Paid Success!", "success!", "success");
                    </script>';
         
            }
            if(isset($_GET['failed']))
            {
                echo'<script>
-                       swal("Approved Fail!!", "Something went wrong!", "error");
+                       swal("Paid Fail!!", "Something went wrong!", "error");
                    </script>'; 
            }
 
-           if(isset($_GET['approve']))
+           if(isset($_GET['paid']))
            {
                 if(isset($_GET['id']))
                 {
@@ -159,7 +155,7 @@
                         include 'Admin.php';
                         //create new instance from Admin class
                         $admin = new Admin(); 
-                        $admin ->approve($book_id);
+                        $admin ->paid($book_id);
 
                     }
                    

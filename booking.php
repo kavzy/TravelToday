@@ -168,11 +168,13 @@ if (isset($_GET['id'])){
                                                 <option value="10">10</option>
                                             </select>
                                         </div>
+                                        <label>Check In:</label>
                                         <div class="form-group tm-form-element tm-form-element-50">
-                                            <input name="check-in" type="date" class="form-control" >
+                                            <input name="check-in" type="date" class="form-control" required>
                                         </div>
+                                        <label>Check Out:</label>
                                         <div class="form-group tm-form-element tm-form-element-50">
-                                            <input name="check-out" type="date" class="form-control">
+                                            <input name="check-out" type="date" class="form-control" required>
                                         </div>
                                         <input type="hidden" name="pkgID" value="<?php echo $pkgid; ?>">
                                         <button type="submit" class="btn btn-primary tm-btn-search">Got to Next Step</button>

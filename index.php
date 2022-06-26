@@ -227,7 +227,9 @@
                                         <header><h3 class="text-uppercase tm-article-title-2"><?php echo $package['name']; ?></h3></header>
                                         <p><?php echo $package['categories']; ?></p>
                                         <p>Locations - <?php echo $package['locations']; ?></p>
-                                        <strong><i class="fa fa-1x fa-clock-o"></i> <?php echo $package['duration']; ?> Days</strong> | <b>$<?php echo $package['price']; ?></b> per person  <br/>
+                                        <strong><i class="fa fa-1x fa-clock-o"></i> <?php echo $package['duration']; ?> Days</strong> <br>
+                                        <b>$<?php echo $package['adult_price']; ?></b> per person (Adult) <br>
+                                         <b>$<?php echo $package['child_price']; ?></b> per person (Child)<br/>
                                         <strong><i class="fa fa-1x fa-bed"></i> <?php echo $package['room']; ?></strong>
                                         <p></p>
                                         <a href="booking.php?id=<?php echo $package['id']; ?>" class="text-uppercase btn-primary tm-btn-primary">Book Now.</a>

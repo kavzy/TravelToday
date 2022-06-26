@@ -7,3 +7,7 @@
 <script src="../assets/js/vendors.js"></script>
 
     <script src="../assets/js/main.js"></script>
+
+    
+ <!-- Sweet Alert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

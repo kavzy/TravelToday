@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
         <link rel="stylesheet" href="../assets/css/app.css">
         <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -115,5 +116,23 @@
     </div>
      <!-- js scripts -->
      <?php include "scripts.php" ?>
+         <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+     <?php 
+                if(isset($_GET['success']))
+                {
+                    echo'<script>
+                            swal("Tour Booked Success!", "Your Tour Booked Success!", "success");
+                        </script>';
+             
+                }
+                if(isset($_GET['failed']))
+                {
+                    echo'<script>
+                            swal("Tour Booked fail!", "Something went wrong!", "error");
+                        </script>'; 
+                }
+    ?>
 </body>
 </html>

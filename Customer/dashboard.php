@@ -115,5 +115,21 @@
     </div>
      <!-- js scripts -->
      <?php include "scripts.php" ?>
+
+    <?php 
+           if(isset($_GET['success']))
+           {
+               echo'<script>
+                       swal("Tour Booked Success!", "Thank You! Our staff member will contact you soon!", "success");
+                   </script>';
+        
+           }
+           if(isset($_GET['failed']))
+           {
+               echo'<script>
+                       swal("Tour Booked fail!", "Something went wrong!", "error");
+                   </script>'; 
+           }
+    ?>
 </body>
 </html>

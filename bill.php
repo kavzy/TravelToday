@@ -2,9 +2,13 @@
     session_start();
 ?>
 <?php 
-if (isset($_GET['id'])){ 
-    if(is_numeric($_GET['id'])){
-        $pkg_id = $_GET['id'];
+if (isset($_POST['pkgID'])){ 
+    if(is_numeric($_POST['pkgID'])){
+        $pkg_id = $_POST['pkgID'];
+        $total_adult = $_POST['adult'];
+        $total_child = $_POST['children'];
+        $checkin = $_POST['check-in'];
+        $checkout = $_POST['check-out'];
     }else{
         ?>
         <script>
@@ -135,47 +139,34 @@ if (isset($_GET['id'])){
                                 </article>
                                 <article class="col-sm-6 col-md-6 col-lg-6 col-xl-6 tm-article">                           
                                 <i class="fa tm-fa-6x fa-life-saver tm-color-primary tm-margin-b-20"></i>
-                                <h3 class="tm-color-primary tm-article-title-1">Add Tour Details</h3>
-                                <form action="bill.php" method="post">
-                                        <div class="form-group tm-form-element tm-form-element-2">                                            
-                                            <select name="adult" class="form-control tm-select" id="adult" required>
-                                                <option value="">Adult</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group tm-form-element tm-form-element-2">                                            
-                                            <select name="children" class="form-control tm-select" id="children" required>
-                                                <option value="">Children</option>
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group tm-form-element tm-form-element-50">
-                                            <input name="check-in" type="date" class="form-control" >
-                                        </div>
-                                        <div class="form-group tm-form-element tm-form-element-50">
-                                            <input name="check-out" type="date" class="form-control">
-                                        </div>
-                                        <input type="hidden" name="pkgID" value="<?php echo $pkgid; ?>">
-                                        <button type="submit" class="btn btn-primary tm-btn-search">Got to Next Step</button>
+                                <h3 class="tm-color-primary tm-article-title-1">Bill Details</h3>
+                                <form action="Customer/checkout.php" method="post">
+                                    <div class="form-group tm-form-element tm-form-element-100">
+                                         <label><b>Total Adult</b></label><input type="text" class="form-control" name="total_adult" value="<?php echo $total_adult; ?>" readonly>
+                                    </div>
+                                    <div class="form-group tm-form-element tm-form-element-100">
+                                         <label><b>Total Children</b></label><input type="text" class="form-control" name="total_children" value="<?php echo $total_child; ?>" readonly>
+                                    </div>
+                                    <br>
+                                    <?php
+                                    $totalAdultPrice = $total_adult*$package['adult_price'];
+                                    $totalChildPrice = $total_child*$package['child_price'];
+                                    $totalPrice = $totalAdultPrice + $totalChildPrice;
+                                    
+                                    ?>
+                                    <p><font color ="red">Check In :</font>  <?php echo $checkin; ?></p>
+                                    <p><font color ="red">Check Out :</font>  <?php echo $checkout; ?></p>
+                                    <p><font color ="red">Adult Price</font> : <?php echo $total_adult.' * '.$package['adult_price'].' = $'.$total_adult*$package['adult_price'] ; ?> </p>
+                                    <p><font color ="red">Children Price</font> : <?php echo $total_child.' * '.$package['child_price'].' = $'.$total_child*$package['child_price'] ; ?> </p>
+                                    <input type="hidden" name="total" value="<?php echo $totalPrice; ?>">
+                                    <input type="hidden" name="total_adult_price" value="<?php echo $totalAdultPrice; ?>">
+                                    <input type="hidden" name="total_child_price" value="<?php echo $totalChildPrice; ?>">
+                                    <input type="hidden" name="pkg_id" value="<?php echo $pkgid; ?>">
+                                    <input type="hidden" name="check-in" value="<?php echo $checkin; ?>">
+                                    <input type="hidden" name="check-out" value="<?php echo $checkout; ?>">
+                                    
+                                    <p><strong>Total</strong> : <font size="3"> $</font> <font size="5"> <?php echo $totalPrice; ?> </font> </p>
+                                    <button type="submit" class="btn btn-primary tm-btn-search">Checkout Now</button>
                                 </form>
                                                         
                                 </article>
@@ -186,7 +177,7 @@ if (isset($_GET['id'])){
                             <i class="fa tm-fa-6x fa-life-saver tm-color-primary tm-margin-b-20"></i>
                             <h3 class="tm-color-primary tm-article-title-1">You are in Admin Mode</h3>
                             <p>You cannot checkout packages with admin !! please login with customer mode</p>
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">logout</a>                           
+                            <a href="logout.php" class="text-uppercase tm-color-primary tm-font-semibold">logout</a>                           
                             </article>
                      <?php }
                    }else{ ?>
@@ -194,8 +185,8 @@ if (isset($_GET['id'])){
                             <i class="fa tm-fa-6x fa-life-saver tm-color-primary tm-margin-b-20"></i>
                             <h3 class="tm-color-primary tm-article-title-1">Checkout</h3>
                             <p>To checkout your package please login or create account!</p>
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Create Account</a> |    
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Login</a>                         
+                            <a href="create_account.php" class="text-uppercase tm-color-primary tm-font-semibold">Create Account</a> |    
+                            <a href="login.php" class="text-uppercase tm-color-primary tm-font-semibold">Login</a>                         
                             </article>
                  <?php  } ?>
                        

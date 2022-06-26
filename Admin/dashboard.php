@@ -109,7 +109,7 @@
     </section>
 </div>
 
-             <!-- Headernav -->
+             <!-- footer -->
     <?php include "footer.php" ?>
         </div>
     </div>

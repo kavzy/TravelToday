@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,9 +56,23 @@
                                   <li class="nav-item">
                                     <a class="nav-link" href="#tm-section-6">Contact Us</a>
                                   </li>
+                                  <?php
+                                  if((isset($_SESSION['role_id'])) && (isset($_SESSION['username']))){
+                                        if ($_SESSION['role_id'] == 1) { ?>
+                                             <li class="nav-item">
+                                            <a class="nav-link" onclick="panelAdmin()" href="#">My Panel</a>
+                                             </li> <?php
+                                        }else if($_SESSION['role_id'] == 2){ ?>
+                                             <li class="nav-item">
+                                            <a class="nav-link" onclick="panelCustomer()" href="#">My Panel</a>
+                                             </li> <?php
+                                        }  
+                                    }else{ ?>
                                   <li class="nav-item">
                                     <a class="nav-link" id="login" href="#">Login</a>
                                   </li>
+                                    <?php }
+                                  ?>
                                 </ul>
                             </div>                            
                         </nav>            
@@ -516,11 +533,26 @@
                 $('.tm-current-year').text(new Date().getFullYear());                           
             });
 
+            //check login click
             document.getElementById("login").addEventListener("click", login);
 
             function login() {
-                location.replace('login.php');;
+                location.replace('login.php');
             }
+
+            //check panel-admin click----------------------------------------------
+
+            function panelAdmin() {
+                location.replace('Admin/dashboard.php');
+            }
+            //check panel-admin click end------------------------------------------
+
+            //check panel-customer click----------------------------------------------
+
+            function panelCustomer() {
+                location.replace('Customer/dashboard.php');
+            }
+            //check panel-admin click end------------------------------------------
 
         </script>             
 

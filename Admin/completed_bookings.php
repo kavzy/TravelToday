@@ -94,7 +94,7 @@
                             }else if($book['status'] == 1){
                                 $status = '<span class="badge bg-warning">waiting for payment</span>';
                             }else if($book['status'] == 2){
-                                $status = '<span class="badge bg-success">success</span>';
+                                $status = '<span class="badge bg-success">completed</span>';
                             }else{
                                 $status = 'not found';
                             }

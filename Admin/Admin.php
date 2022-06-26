@@ -332,7 +332,7 @@
         }
 
           //Mark as paid booking
-          public function paid($bookid)
+          public function paid($bookid, $customerid, $total)
           {
               require_once '../Database.php';
               $conn = new Database();
@@ -345,11 +345,24 @@
           
               if($stmt->execute())
               {
-                  $stmt->close();
+                $stmt->close();
+
+                $stmt2 = $db->prepare("INSERT INTO payments (booking_id, customer_id, total) VALUES (?,?,?)");
+                $stmt2->bind_param("sss", $bookid,$customerid, $total);
+                
+                if($stmt2->execute())
+                {
+                  $stmt2->close();
   
                   echo'<script>
                           location.replace("pending_payments.php?success=true");
                       </script>';
+                }else{
+                    echo'<script>
+                            location.replace("pending_payments.php?failed=true");
+                        </script>';
+                }
+
               }else{
                   echo'<script>
                           location.replace("pending_payments.php?failed=true");

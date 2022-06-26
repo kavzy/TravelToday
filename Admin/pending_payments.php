@@ -95,7 +95,7 @@
                             }else if($book['status'] == 1){
                                 $status = '<span class="badge bg-warning">waiting for payment</span>';
                             }else if($book['status'] == 2){
-                                $status = '<span class="badge bg-success">success</span>';
+                                $status = '<span class="badge bg-success">completed</span>';
                             }else{
                                 $status = 'not found';
                             }
@@ -115,7 +115,7 @@
                             <a href="view_customer.php?id=<?php echo $book['customer_id']; ?>" class="btn btn-secondary">View Customer Details</a>
                             </td>
                             <td>
-                            <a href="pending_payments.php?paid=1&id=<?php echo $book['id']; ?>" class="btn btn-primary">Mark as Paid</a>
+                            <a href="pending_payments.php?paid=1&id=<?php echo $book['id']; ?>&customer=<?php echo $book['customer_id']; ?>&total=<?php echo $book['total']; ?>" class="btn btn-primary">Mark as Paid</a>
                             </td>
                         </tr>
                     <?php endforeach;?>
@@ -156,10 +156,12 @@
                     if(is_numeric($_GET['id']))
                     {
                         $book_id = $_GET['id'];
+                        $cus_id = $_GET['customer'];
+                        $total = $_GET['total'];
                         include 'Admin.php';
                         //create new instance from Admin class
                         $admin = new Admin(); 
-                        $admin ->paid($book_id);
+                        $admin ->paid($book_id, $cus_id, $total);
 
                     }
                    

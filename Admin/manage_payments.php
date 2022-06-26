@@ -3,7 +3,7 @@
     if(!(isset($_SESSION['role_id'])) && !(isset($_SESSION['username']))){
         header("location:../index.php");
     }
-    if ($_SESSION['role_id'] != 2) {
+    if ($_SESSION['role_id'] != 1) {
         header("location:../index.php");
     }  
 
@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer</title>
+    <title>Admin</title>
     
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     
@@ -45,13 +45,13 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>My Bookings</h3>
+                <h3>Manage Payments</h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">My Bookings</li>
+                        <li class="breadcrumb-item active" aria-current="page">Manage Payments</li>
                     </ol>
                 </nav>
             </div>
@@ -60,20 +60,17 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                Simple Datatable
+                Manage Payments
             </div>
             <div class="card-body">
                 <table class='table table-striped' id="table1">
                     <thead>
                         <tr>
+                            <th>Payment ID</th>
                             <th>Booking ID</th>
-                            <th>Package ID</th>
-                            <th>Total Adult</th>
-                            <th>Total Children</th>
-                            <th>Check In</th>
-                            <th>Check Out</th>
+                            <th>Customer ID</th>
                             <th>Total</th>
-                            <th>Status</th>
+                            <th>Date and Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,33 +79,19 @@
                          $connect = new Database();
                          $userid = $_SESSION['id'];
                          $db = $connect->db();
-                         $sql = "SELECT * FROM bookings WHERE customer_id = $userid";
+                         $sql = "SELECT * FROM payments";
                          $result = mysqli_query($db, $sql);
-                         $books = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                         $payments = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     ?>
-                    <?php foreach ($books as $book): ?>
-                        <?php
-                            if($book['status'] == 0){
-                                $status = '<span class="badge bg-danger">waiting for approval</span>';
-                            }else if($book['status'] == 1){
-                                $status = '<span class="badge bg-warning">waiting for payment</span>';
-                            }else if($book['status'] == 2){
-                                $status = '<span class="badge bg-success">completed</span>';
-                            }else{
-                                $status = 'not found';
-                            }
-                        ?>
+                    <?php foreach ($payments  as $payment): ?>
+                      
                         <tr>
-                            <td><?php echo $book['id']; ?></td>
-                            <td><?php echo $book['package_id']; ?></td>
-                            <td><?php echo $book['total_adult']; ?></td>
-                            <td><?php echo $book['total_child']; ?></td>
-                            <td><?php echo $book['checkin']; ?></td>
-                            <td><?php echo $book['checkout']; ?></td>
-                            <td>$ <?php echo $book['total']; ?></td>
-                            <td>
-                            <?php echo $status; ?>
-                            </td>
+                            <td><?php echo $payment['id']; ?></td>
+                            <td><?php echo $payment['booking_id']; ?></td>
+                            <td><?php echo $payment['customer_id']; ?></td>
+                            <td>$ <?php echo $payment['total']; ?></td>
+                            <td><?php echo $payment['date']; ?></td>
+                            
                         </tr>
                     <?php endforeach;?>
                     </tbody>
@@ -130,15 +113,34 @@
            if(isset($_GET['success']))
            {
                echo'<script>
-                       swal("Tour Booked Success!", "Thank You! Our staff member will contact you soon!", "success");
+                       swal("Approved Success!", "success!", "success");
                    </script>';
         
            }
            if(isset($_GET['failed']))
            {
                echo'<script>
-                       swal("Tour Booked fail!", "Something went wrong!", "error");
+                       swal("Approved Fail!!", "Something went wrong!", "error");
                    </script>'; 
+           }
+
+           if(isset($_GET['approve']))
+           {
+                if(isset($_GET['id']))
+                {
+                    if(is_numeric($_GET['id']))
+                    {
+                        $book_id = $_GET['id'];
+                        include 'Admin.php';
+                        //create new instance from Admin class
+                        $admin = new Admin(); 
+                        $admin ->approve($book_id);
+
+                    }
+                   
+            
+                }
+        
            }
     ?>
 </body>

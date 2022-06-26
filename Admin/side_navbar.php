@@ -12,7 +12,7 @@
                         <i data-feather="briefcase" width="20"></i> 
                         <span>Home Page</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="dashboard.php" class='sidebar-link'>
                         <i data-feather="briefcase" width="20"></i> 
                         <span>Manage Bookings</span>
                     </a>
@@ -20,11 +20,11 @@
                         <i data-feather="inbox" width="20"></i> 
                         <span>Messages</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="manage_customers.php" class='sidebar-link'>
                         <i data-feather="users" width="20"></i> 
                         <span>Manage Customers</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="manage_payments.php" class='sidebar-link'>
                         <i data-feather="file-text" width="20"></i> 
                         <span>Manage Payments</span>
                     </a>
@@ -36,7 +36,7 @@
                         <i data-feather="user" width="20"></i> 
                         <span>Manage Admins</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="manage_packages.php" class='sidebar-link'>
                         <i data-feather="grid" width="20"></i> 
                         <span>Manage Packages</span>
                     </a>

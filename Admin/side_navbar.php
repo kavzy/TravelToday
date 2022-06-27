@@ -29,10 +29,6 @@
                         <span>Manage Payments</span>
                     </a>
                     <a href="index.html" class='sidebar-link'>
-                        <i data-feather="file-text" width="20"></i> 
-                        <span>Manage Expenses</span>
-                    </a>
-                    <a href="index.html" class='sidebar-link'>
                         <i data-feather="user" width="20"></i> 
                         <span>Manage Admins</span>
                     </a>

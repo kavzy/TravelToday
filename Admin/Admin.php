@@ -467,5 +467,31 @@
                     </script>';
             }
         }
+
+          //update customer status
+          public function update_customer_status($id, $val)
+          {
+              require_once '../Database.php';
+              $conn = new Database();
+              $db = $conn->db();
+              $value = $val;
+  
+              //update hotel table
+              $stmt = $db->prepare("UPDATE users SET is_active = ? WHERE id='".$id."'");
+              $stmt->bind_param("s", $value);
+          
+              if($stmt->execute())
+              {
+                  $stmt->close();
+  
+                  echo'<script>
+                          location.replace("manage_customers.php?success=true");
+                      </script>';
+              }else{
+                  echo'<script>
+                          location.replace("manage_customers.php?failed=true");
+                      </script>';
+              }
+          }
     }
 ?>

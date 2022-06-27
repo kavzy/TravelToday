@@ -213,7 +213,7 @@
                                    require_once 'Database.php';
                                    $connect = new Database();
                                    $db = $connect->db();
-                                   $sql = "SELECT * FROM packages WHERE is_active = 1";
+                                   $sql = "SELECT * FROM packages WHERE is_active = 1 LIMIT 10";
                                    $result = mysqli_query($db, $sql);
                                    $packages = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             ?>

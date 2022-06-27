@@ -168,14 +168,14 @@ if (isset($_GET['id'])){
            if(isset($_GET['success']))
            {
                echo'<script>
-                       swal("Package Added Success!", "success!", "success");
+                       swal("Package Updated Success!", "success!", "success");
                    </script>';
         
            }
            if(isset($_GET['failed']))
            {
                echo'<script>
-                       swal("Package Added Fail!!", "Something went wrong!", "error");
+                       swal("Package Updated Fail!!", "Something went wrong!", "error");
                    </script>'; 
            }
 
@@ -219,7 +219,7 @@ if (isset($_GET['id'])){
 
                         if (!in_array($extension, ['jpg', 'jpeg', 'png', 'JPEG', 'JPG'])) {
                             echo'<script>
-                                swal("Failed!", "Your file extension must be  .xlsx, .pdf or .docx", "error");
+                                swal("Failed!", "Your file extension must be  jpg , jpeg or png", "error");
                                 </script>';
                         } elseif ($_FILES['image']['size'] > 1000000) { // file shouldn't be larger than 1Megabyte
                             echo'<script>

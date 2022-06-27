@@ -98,10 +98,10 @@
                         <?php
                             if($user['is_active'] == 0){
                                 $status = '<span class="badge bg-danger">Deactivated</span>';
-                                $btn = '<a href="manage_customers.php?active=1&id='.$user['id'].';" class="btn btn-success">Activate</a>';
+                                $btn = '<a href="manage_customers.php?active=1&id='.$user['id'].'" class="btn btn-success">Activate</a>';
                             }else{
                                 $status = '<span class="badge bg-success">Activated</span>';
-                                $btn = '<a href="manage_customers.php?deactive=1&id='.$user['id'].';" class="btn btn-danger">Deactivate</a>';
+                                $btn = '<a href="manage_customers.php?deactive=1&id='.$user['id'].'" class="btn btn-danger">Deactivate</a>';
                             }
                         ?>
                         <tr>
@@ -119,7 +119,7 @@
                             <?php echo $btn; ?>
                             </td>
                             <td>
-                            <a href="manage_customers.php?edit=1&id='<?php echo $user['id'] ?>';" class="btn btn-primary">Edit</a>
+                            <a href="edit_customer.php?id=<?php echo $user['id']; ?>" class="btn btn-primary">Edit</a>
                             </td>
                         </tr>
                         <?php endforeach;?>
@@ -143,14 +143,14 @@
            if(isset($_GET['success']))
            {
                echo'<script>
-                       swal("Approved Success!", "success!", "success");
+                       swal("Success!", "success!", "success");
                    </script>';
         
            }
            if(isset($_GET['failed']))
            {
                echo'<script>
-                       swal("Approved Fail!!", "Something went wrong!", "error");
+                       swal("Fail!!", "Something went wrong!", "error");
                    </script>'; 
            }
 
@@ -171,6 +171,40 @@
             
                 }
         
+           }
+
+           if(isset($_GET['active']))
+           {
+                if(isset($_GET['id']))
+                {
+                    if(is_numeric($_GET['id']))
+                    {
+                        $cus_id = $_GET['id'];
+                        include 'Admin.php';
+                        //create new instance from Admin class
+                        $admin = new Admin(); 
+                        $admin ->update_customer_status($cus_id, 1);
+
+                    }
+                   
+            
+                }
+           }else if(isset($_GET['deactive']))
+           {
+                if(isset($_GET['id']))
+                {
+                    if(is_numeric($_GET['id']))
+                    {
+                        $cus_id = $_GET['id'];
+                        include 'Admin.php';
+                        //create new instance from Admin class
+                        $admin = new Admin(); 
+                        $admin ->update_customer_status($cus_id, 0);
+
+                    }
+                   
+            
+                }
            }
     ?>
 </body>

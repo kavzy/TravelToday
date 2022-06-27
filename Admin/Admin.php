@@ -369,5 +369,103 @@
                       </script>';
               }
           }
+
+          //add package
+          public function add_package($name, $duration, $rooms, $adult, $child, $locations, $categories, $filename)
+          {
+              require_once '../Database.php';
+              $conn = new Database();
+              $db = $conn->db();
+  
+             // $current_date_time = date("Y-m-d H:i:s");
+  
+              $stmt = $db->prepare("INSERT INTO packages (name, locations, categories, duration, room, adult_price, child_price, pic) VALUES (?,?,?,?,?,?,?,?)");
+              $stmt->bind_param("ssssssss", $name, $locations, $categories, $duration, $rooms, $adult, $child, $filename);
+              
+              if($stmt->execute())
+              {
+                  echo'<script>
+                          location.replace("add_package.php?success=true");
+                      </script>';
+              }else{
+                  echo'<script>
+                          location.replace("add_package.php?failed=true");
+                      </script>';
+              }
+          }
+
+             //update package
+             public function update_package_without_img($id, $name, $duration, $rooms, $adult, $child, $locations, $categories)
+             {
+                 require_once '../Database.php';
+                 $conn = new Database();
+                 $db = $conn->db();
+     
+                // $current_date_time = date("Y-m-d H:i:s");
+     
+                 $stmt = $db->prepare("UPDATE packages SET name = ?,locations = ?, categories = ?, duration = ?, room = ?, adult_price = ?, child_price = ? WHERE id='".$id."'");
+                 $stmt->bind_param("sssssss", $name, $locations, $categories, $duration, $rooms, $adult, $child);
+                 
+                 if($stmt->execute())
+                 {
+                     echo'<script>
+                             location.replace("edit_package.php?id='.$id.'&success=true");
+                         </script>';
+                 }else{
+                     echo'<script>
+                             location.replace("edit_package.php?id='.$id.'&failed=true");
+                         </script>';
+                 }
+             }
+
+                  //update package
+            public function update_package($id, $name, $duration, $rooms, $adult, $child, $locations, $categories, $file)
+            {
+                      require_once '../Database.php';
+                      $conn = new Database();
+                      $db = $conn->db();
+          
+                     // $current_date_time = date("Y-m-d H:i:s");
+          
+                      $stmt = $db->prepare("UPDATE packages SET name = ?,locations = ?, categories = ?, duration = ?, room = ?, adult_price = ?, child_price = ?, pic = ? WHERE id='".$id."'");
+                      $stmt->bind_param("ssssssss", $name, $locations, $categories, $duration, $rooms, $adult, $child, $file);
+                      
+                      if($stmt->execute())
+                      {
+                          echo'<script>
+                                  location.replace("edit_package.php?id='.$id.'&success=true");
+                              </script>';
+                      }else{
+                          echo'<script>
+                                  location.replace("edit_package.php?id='.$id.'&failed=true");
+                              </script>';
+                      }
+        }
+
+        //update package status
+        public function update_pkg_status($id, $val)
+        {
+            require_once '../Database.php';
+            $conn = new Database();
+            $db = $conn->db();
+            $value = $val;
+
+            //update hotel table
+            $stmt = $db->prepare("UPDATE packages SET is_active = ? WHERE id='".$id."'");
+            $stmt->bind_param("s", $value);
+        
+            if($stmt->execute())
+            {
+                $stmt->close();
+
+                echo'<script>
+                        location.replace("manage_packages.php?success=true");
+                    </script>';
+            }else{
+                echo'<script>
+                        location.replace("manage_packages.php?failed=true");
+                    </script>';
+            }
+        }
     }
 ?>

@@ -222,7 +222,7 @@
                                     $pkgid = $package['id'];
                                  ?>                         
                                 <article class="tm-bg-white mr-2 tm-carousel-item">
-                                    <img src="img/packages/ad1.jpg" height='262' width='370' alt="Image" class="img-fluid">
+                                    <img src="img/packages/<?php echo $package['pic']; ?>" height='262' width='370' alt="Image" class="img-fluid">
                                     <div class="tm-article-pad">
                                         <header><h3 class="text-uppercase tm-article-title-2"><?php echo $package['name']; ?></h3></header>
                                         <p><?php echo $package['categories']; ?></p>

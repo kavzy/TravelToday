@@ -10,6 +10,7 @@
     $user = $_SESSION['username'];
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +61,7 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                Packages | <a href="pending_payments.php" class="btn rounded btn-info">Add New Package</a>
+                Packages | <a href="add_package.php" class="btn rounded btn-info">Add New Package</a>
             </div>
             <div class="card-body">
                 <table class='table table-striped' id="table1">
@@ -93,10 +94,10 @@
                         <?php
                             if($package['is_active'] == 0){
                                 $status = '<span class="badge bg-danger">Not Available</span>';
-                                $btn = '<a href="manage_packages.php?active=1&id='.$package['id'].';" class="btn btn-success">Activate</a>';
+                                $btn = '<a href="manage_packages.php?active=1&id='.$package['id'].'" class="btn btn-success">Activate</a>';
                             }else{
                                 $status = '<span class="badge bg-success">Available</span>';
-                                $btn = '<a href="manage_packages.php?deactive=1&id='.$package['id'].';" class="btn btn-danger">Deactivate</a>';
+                                $btn = '<a href="manage_packages.php?deactive=1&id='.$package['id'].'" class="btn btn-danger">Deactivate</a>';
                             }
                         ?>
                         <tr>
@@ -115,7 +116,7 @@
                             <?php echo $btn; ?>
                             </td>
                             <td>
-                            <a href="dashboard.php?approve=1&id=<?php echo $package['id']; ?>" class="btn btn-primary">Edit</a>
+                            <a href="edit_package.php?id=<?php echo $package['id']; ?>" class="btn btn-primary">Edit</a>
                             </td>
                         </tr>
                     <?php endforeach;?>
@@ -138,34 +139,49 @@
            if(isset($_GET['success']))
            {
                echo'<script>
-                       swal("Approved Success!", "success!", "success");
+                       swal("Package Status Updated Success!", "success!", "success");
                    </script>';
         
            }
            if(isset($_GET['failed']))
            {
                echo'<script>
-                       swal("Approved Fail!!", "Something went wrong!", "error");
+                       swal("Package Status Updated Fail!!", "Something went wrong!", "error");
                    </script>'; 
            }
 
-           if(isset($_GET['approve']))
+           if(isset($_GET['active']))
            {
                 if(isset($_GET['id']))
                 {
                     if(is_numeric($_GET['id']))
                     {
-                        $book_id = $_GET['id'];
+                        $pkg_id = $_GET['id'];
                         include 'Admin.php';
                         //create new instance from Admin class
                         $admin = new Admin(); 
-                        $admin ->approve($book_id);
+                        $admin ->update_pkg_status($pkg_id, 1);
 
                     }
                    
             
                 }
-        
+           }else if(isset($_GET['deactive']))
+           {
+                if(isset($_GET['id']))
+                {
+                    if(is_numeric($_GET['id']))
+                    {
+                        $pkg_id = $_GET['id'];
+                        include 'Admin.php';
+                        //create new instance from Admin class
+                        $admin = new Admin(); 
+                        $admin ->update_pkg_status($pkg_id, 0);
+
+                    }
+                   
+            
+                }
            }
     ?>
 </body>

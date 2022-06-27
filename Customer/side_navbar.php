@@ -12,15 +12,15 @@
                         <i data-feather="briefcase" width="20"></i> 
                         <span>Home Page</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="dashboard.php" class='sidebar-link'>
                         <i data-feather="briefcase" width="20"></i> 
                         <span>My Bookings</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <!--<a href="index.html" class='sidebar-link'>
                         <i data-feather="inbox" width="20"></i> 
                         <span>Messages</span>
-                    </a>
-                    <a href="index.html" class='sidebar-link'>
+                    </a> -->
+                    <a href="payment_history.php" class='sidebar-link'>
                         <i data-feather="file-text" width="20"></i> 
                         <span>My Payments History</span>
                     </a>

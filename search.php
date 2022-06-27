@@ -106,7 +106,7 @@ if (isset($_POST['search'])){
                                     require_once 'Database.php';
                                     $connect = new Database();
                                     $db = $connect->db();
-                                    $sql = "SELECT * FROM packages WHERE locations LIKE '%$search%' AND room = $rooms";
+                                    $sql = "SELECT * FROM packages WHERE locations LIKE '%$search%' AND room = $rooms AND is_active = 1";
                                     $result = mysqli_query($db, $sql);
                                     $packages = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                 ?>

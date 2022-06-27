@@ -66,7 +66,7 @@
 
 
        //check user email exists function
-        public function checkEmailExists($email, $user_id)
+        public function checkEmailExists($email)
         {   
             require_once '../Database.php';
             $conn = new Database();
@@ -74,14 +74,7 @@
             $query = $db->query("SELECT email FROM users WHERE email = '$email'");
             if($query->num_rows == 1)
             {
-               $query2 = $db->query("SELECT email FROM users WHERE email ='$email' AND id = '".$user_id."'");
-               if($query2->num_rows == 1)
-               {
-                   return FALSE;
-
-               }else{
-                    return TRUE;
-               }
+                return TRUE;
 
             }else{
 
@@ -91,7 +84,7 @@
         //end check user email exists function
 
         //check user email exists funtion
-        public function checkUsernameExists($username, $user_id)
+        public function checkUsernameExists($username)
         {   
             require_once '../Database.php';
             $conn = new Database();
@@ -99,14 +92,7 @@
             $query = $db->query("SELECT username FROM users WHERE username = '$username'");
             if($query->num_rows == 1)
             {
-               $query2 = $db->query("SELECT username FROM users WHERE username ='$username' AND id = '".$user_id."'");
-               if($query2->num_rows == 1)
-               {
-                   return FALSE;
-
-               }else{
-                    return TRUE;
-               }
+                return TRUE;
 
             }else{
 
@@ -304,5 +290,7 @@
                       </script>';
               }
           }
+
+
     }
 ?>

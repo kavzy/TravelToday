@@ -107,37 +107,37 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">First Name</label>
-                                            <input type="text" id="first-name-column" class="form-control" value="<?php echo $customer['first_name']; ?>">
+                                            <input type="text" name="firstname" id="first-name-column" class="form-control" value="<?php echo $customer['first_name']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="last-name-column">Last Name</label>
-                                            <input type="text" id="last-name-column" class="form-control" value="<?php echo $customer['last_name']; ?>">
+                                            <input type="text" name="lastname" id="last-name-column" class="form-control" value="<?php echo $customer['last_name']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="city-column">UserName</label>
-                                            <input type="text" id="city-column" class="form-control" value="<?php echo $customer['username']; ?>">
+                                            <input type="text" name="username" id="city-column" class="form-control" value="<?php echo $customer['username']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="country-floating">Email</label>
-                                            <input type="email" id="country-floating" class="form-control" value="<?php echo $customer['email']; ?>">
+                                            <input type="email" name="email" id="country-floating" class="form-control" value="<?php echo $customer['email']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="company-column">Address</label>
-                                            <input type="text" id="company-column" class="form-control" value="<?php echo $customer['address']; ?>">
+                                            <input type="text" name="address" id="company-column" class="form-control" value="<?php echo $customer['address']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="email-id-column">Mobile</label>
-                                            <input type="email" id="email-id-column" class="form-control" value="<?php echo $customer['mobile']; ?>">
+                                            <input type="number" name="mobile" id="email-id-column" class="form-control" value="<?php echo $customer['mobile']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
@@ -171,34 +171,44 @@
            if(isset($_GET['success']))
            {
                echo'<script>
-                       swal("Approved Success!", "success!", "success");
+                       swal("Update Success!", "success!", "success");
                    </script>';
         
            }
            if(isset($_GET['failed']))
            {
                echo'<script>
-                       swal("Approved Fail!!", "Something went wrong!", "error");
+                       swal("Updated Fail!!", "Something went wrong!", "error");
+                   </script>'; 
+           }
+           if(isset($_GET['username']))
+           {
+               echo'<script>
+                       swal("Username already exists!!", "Something went wrong!", "error");
                    </script>'; 
            }
 
-           if(isset($_GET['approve']))
+           if(isset($_GET['email']))
            {
-                if(isset($_GET['id']))
-                {
-                    if(is_numeric($_GET['id']))
-                    {
-                        $book_id = $_GET['id'];
-                        include 'Admin.php';
-                        //create new instance from Admin class
-                        $admin = new Admin(); 
-                        $admin ->approve($book_id);
+               echo'<script>
+                       swal("Email already exists!!", "Something went wrong!", "error");
+                   </script>'; 
+           }
 
-                    }
-                   
-            
-                }
-        
+           if(isset($_POST['submit']))
+           {
+                
+                $userid = $_GET['id'];
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
+                $username = $_POST['username'];
+                $email = $_POST['email'];
+                $mobile = $_POST['mobile'];
+                $address = $_POST['address'];
+                include 'Admin.php';
+                //create new instance from Admin class
+                $admin = new Admin(); 
+                $admin ->customerUpdateAccount($firstname, $lastname, $email, $username, $address,$mobile, $userid);
            }
     ?>
 </body>

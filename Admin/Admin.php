@@ -57,9 +57,6 @@
 
                      }
             }
-            
-       
-        
 
             }
             //end update account function
@@ -493,5 +490,59 @@
                       </script>';
               }
           }
+
+        //customer account update function
+        public function customerUpdateAccount($firstName, $lastName, $email, $username, $address,$mobile, $userid)
+        {
+             require_once '../Database.php';
+             $conn = new Database();
+             $db = $conn->db();
+
+            $is_username_exists = $this->checkUsernameExists($username, $userid);
+            $is_email_exists = $this->checkEmailExists($email, $userid);
+
+            if(!$is_username_exists){
+                if(!$is_email_exists){
+
+                    $stmt = $db->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, username = ?, address = ?, mobile = ? WHERE id='".$userid."'");
+                    $stmt->bind_param("ssssss", $firstName, $lastName, $email, $username,$address, $mobile);
+                    
+                    if($stmt->execute())
+                    {
+                         
+                        $stmt->close();
+        
+                        echo'<script>
+                                location.replace("edit_customer.php?id='.$userid.'&success=true");
+                               </script>';
+                     }else{
+                            echo'<script>
+                                location.replace("edit_customer.php?id='.$userid.'&failed=true");
+                                </script>';
+        
+                             }
+
+                }else{
+
+                    echo'<script>
+                    location.replace("edit_customer.php?id='.$userid.'&email=false");
+                    </script>';
+
+                }
+
+            }else{
+
+                echo'<script>
+                location.replace("edit_customer.php?id='.$userid.'&username=false");
+                </script>';
+
+            }
+            
+             // prepare and bind
+           
+           
+                    
+            //end update account function
     }
+}
 ?>

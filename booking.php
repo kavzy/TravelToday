@@ -188,16 +188,20 @@ if (isset($_GET['id'])){
                             <i class="fa tm-fa-6x fa-life-saver tm-color-primary tm-margin-b-20"></i>
                             <h3 class="tm-color-primary tm-article-title-1">You are in Admin Mode</h3>
                             <p>You cannot checkout packages with admin !! please login with customer mode</p>
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">logout</a>                           
+                            <a href="logout.php" class="text-uppercase tm-color-primary tm-font-semibold">logout</a>                           
                             </article>
                      <?php }
-                   }else{ ?>
+                   }else{
+
+                    $_SESSION['pkg_checkout_id'] = $pkg_id;
+                    
+                    ?>
                             <article class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-article">                           
                             <i class="fa tm-fa-6x fa-life-saver tm-color-primary tm-margin-b-20"></i>
                             <h3 class="tm-color-primary tm-article-title-1">Checkout</h3>
                             <p>To checkout your package please login or create account!</p>
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Create Account</a> |    
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Login</a>                         
+                            <a href="create_account.php" class="text-uppercase tm-color-primary tm-font-semibold">Create Account</a> |    
+                            <a href="login.php" class="text-uppercase tm-color-primary tm-font-semibold">Login</a>                         
                             </article>
                  <?php  } ?>
                        

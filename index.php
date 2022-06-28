@@ -1,6 +1,7 @@
 <?php
     session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Trave Today Agency</title>
+    <title>Travel Today Agency</title>
     <!-- load stylesheets -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  <!-- Google web font "Open Sans" -->
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">                <!-- Font Awesome -->
@@ -17,6 +18,9 @@
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
     <link rel="stylesheet" type="text/css" href="css/datepicker.css"/>
     <link rel="stylesheet" href="css/tooplate-style.css">                                   <!-- Templatemo style -->
+    
+                     <!-- Sweet Alert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,6 +31,23 @@
 </head>
 
     <body>
+    <?php
+
+if(isset($_GET['success']))
+        {
+            echo'<script>
+                    swal("Message Sent Success!", Thank You!", "success");
+                </script>';
+        
+        }
+        if(isset($_GET['failed']))
+        {
+            echo'<script>
+                    swal("Message Sent Fail!!", "Something went wrong!", "error");
+                </script>'; 
+        }
+
+    ?>
         <div class="tm-main-content" id="top">
             <div class="tm-top-bar-bg"></div>
             <div class="tm-top-bar" id="tm-top-bar">
@@ -181,23 +202,24 @@
                 </svg> 
                 <div class="container tm-pt-5 tm-pb-4">
                     <div class="row text-center">
-                        <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">                            
-                            <i class="fa tm-fa-6x fa-legal tm-color-primary tm-margin-b-20"></i>
-                            <h3 class="tm-color-primary tm-article-title-1">Pellentesque accumsan arcu nec dolor tempus</h3>
+                        <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">
+                            <i class="fa tm-fa-6x fa-book tm-color-primary tm-margin-b-20"></i>                          
+                            
+                            <h3 class="tm-color-primary tm-article-title-1">Online Tour Booking</h3>
                             <p>Pellentesque at velit ante. Duis scelerisque metus vel felis porttitor gravida. Donec at felis libero. Mauris odio tortor.</p>
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Continue reading...</a>
+                           
                         </article>
                         <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">                            
                             <i class="fa tm-fa-6x fa-plane tm-color-primary tm-margin-b-20"></i>
-                            <h3 class="tm-color-primary tm-article-title-1">Duis scelerisque metus vel felis porttitor</h3>
+                            <h3 class="tm-color-primary tm-article-title-1">Flight Tickets</h3>
                             <p>Pellentesque at velit ante. Duis scelerisque metus vel felis porttitor gravida. Donec at felis libero. Mauris odio tortor.</p>
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Continue reading...</a>                            
+                                                       
                         </article>
                         <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">                           
-                            <i class="fa tm-fa-6x fa-life-saver tm-color-primary tm-margin-b-20"></i>
-                            <h3 class="tm-color-primary tm-article-title-1">Etiam aliquam arcu at mauris consectetur</h3>
+                            <i class="fa tm-fa-6x fa-car tm-color-primary tm-margin-b-20"></i>
+                            <h3 class="tm-color-primary tm-article-title-1">Vehicle Facilities</h3>
                             <p>Pellentesque at velit ante. Duis scelerisque metus vel felis porttitor gravida. Donec at felis libero. Mauris odio tortor.</p>
-                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Continue reading...</a>                           
+                                                   
                         </article>
                     </div>        
                 </div>
@@ -243,31 +265,31 @@
                             <div class="tm-bg-white">
                                 <div class="tm-bg-primary tm-sidebar-pad">
                                     <h3 class="tm-color-white tm-sidebar-title">Recommended Places</h3>
-                                    <p class="tm-color-white tm-margin-b-0 tm-font-light">Enamel pin cliche tilde, kitsch and VHS thundercats</p>
+                                    <p class="tm-color-white tm-margin-b-0 tm-font-light">Travel to best places</p>
                                 </div>
                                 <div class="tm-sidebar-pad-2">
-                                    <a href="#" class="media tm-media tm-recommended-item">
-                                        <img src="img/tn-img-01.jpg" alt="Image">
+                                    <a href="recommend.php?search=sigiriya" class="media tm-media tm-recommended-item">
+                                        <img src="img/recommend/sigiriya.jpg" height="90" width="85" alt="Image">
                                         <div class="media-body tm-media-body tm-bg-gray">
-                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Europe</h4>
+                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Sigiriya</h4>
                                         </div>                                        
                                     </a>
-                                    <a href="#" class="media tm-media tm-recommended-item">
-                                        <img src="img/tn-img-02.jpg" alt="Image">
+                                    <a href="recommend.php?search=hikkaduwa" class="media tm-media tm-recommended-item">
+                                        <img src="img/recommend/hikkaduwa.jpg" height="90" width="85"  alt="Image">
                                         <div class="media-body tm-media-body tm-bg-gray">
-                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Asia</h4>
+                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Hikkaduwa</h4>
                                         </div>
                                     </a>
-                                    <a href="#" class="media tm-media tm-recommended-item">
-                                        <img src="img/tn-img-03.jpg" alt="Image">
+                                    <a href="recommend.php?search=ella" class="media tm-media tm-recommended-item">
+                                        <img src="img/recommend/ella.jpg" height="90" width="85"  alt="Image">
                                         <div class="media-body tm-media-body tm-bg-gray">
-                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Africa</h4>
+                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Ella</h4>
                                         </div>
                                     </a>
-                                    <a href="#" class="media tm-media tm-recommended-item">
-                                        <img src="img/tn-img-04.jpg" alt="Image">
+                                    <a href="recommend.php?search=nuwara" class="media tm-media tm-recommended-item">
+                                        <img src="img/recommend/nuwara.jpg" height="90" width="85"  alt="Image">
                                         <div class="media-body tm-media-body tm-bg-gray">
-                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">South America</h4>
+                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Nuwara Eliya</h4>
                                         </div>
                                     </a>
                                 </div>
@@ -291,34 +313,34 @@
                     <div class="container ie-h-align-center-fix">
                         <div class="row tm-flex-align-center">
                             <div class="col-xs-12 col-md-12 col-lg-3 col-xl-3 tm-media-title-container">
-                                <h2 class="text-uppercase tm-section-title-2">ASIA</h2>
-                                <h3 class="tm-color-primary tm-font-semibold tm-section-subtitle-2">Singapore</h3>
+                                <h2 class="text-uppercase tm-section-title-2">Our</h2>
+                                <h3 class="tm-color-primary tm-font-semibold tm-section-subtitle-2">Services</h3>
                             </div>
                             <div class="col-xs-12 col-md-12 col-lg-9 col-xl-9 mt-0 mt-sm-3">
                                 <div class="ml-auto tm-bg-white-shadow tm-pad tm-media-container">
                                     <article class="media tm-margin-b-20 tm-media-1">
-                                        <img src="img/img-03.jpg" alt="Image">
+                                        <img src="img/foods.jpg" height="170" width="280" alt="Image">
                                         <div class="media-body tm-media-body-1 tm-media-body-v-center">
-                                            <h3 class="tm-font-semibold tm-color-primary tm-article-title-3">Suspendisse vel est libero sem phasellus ac laoreet</h3>
+                                            <h3 class="tm-font-semibold tm-color-primary tm-article-title-3">Foods</h3>
                                             <p>Integer libero purus, consectetur vitae posuere quis, maximus id diam. Vivamus eget tellus ornare, sollicitudin quam id, dictum nulla. Phasellus finibus rhoncus justo, tempus eleifend neque dictum ac. Aenean metus leo, consectetur non. 
                                             <br><br>
 											Etiam aliquam arcu at mauris consectetur scelerisque. Integer elementum justo in orci facilisis ultricies. Pellentesque at velit ante. Duis scelerisque metus vel felis porttitor gravida.</p>
                                         </div>                                
                                     </article>
                                     <article class="media tm-margin-b-20 tm-media-1">
-                                        <img src="img/img-04.jpg" alt="Image">
+                                        <img src="img/accommodation.jpg"  height="170" width="280" alt="Image">
                                         <div class="media-body tm-media-body-1 tm-media-body-v-center">
-                                            <h3 class="tm-font-semibold tm-article-title-3">Suspendisse vel est libero sem phasellus ac laoreet</h3>
+                                            <h3 class="tm-font-semibold tm-article-title-3">Accommodation</h3>
                                             <p>Duis accumsan sagittis tortor in ultrices. Praesent tortor ante, fringilla ac nibh porttitor, fermentum commodo nulla.</p>
-                                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Continue reading...</a>
+                                           
                                         </div>                                
                                     </article>
                                     <article class="media tm-margin-b-20 tm-media-1">
-                                        <img src="img/img-05.jpg" alt="Image">
+                                        <img src="img/vehicles.jpg"  height="170" width="280" alt="Image">
                                         <div class="media-body tm-media-body-1 tm-media-body-v-center">
-                                            <h3 class="tm-font-semibold tm-article-title-3">Faucibus dolor ligula nisl metus auctor aliquet</h3>
+                                            <h3 class="tm-font-semibold tm-article-title-3">Vehicles</h3>
                                             <p>Nunc in felis aliquet metus luctus iaculis vel et nisi. Nulla venenatis nisl orci, laoreet ultricies massa tristique id.</p>
-                                            <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">Continue reading...</a>
+                                            
                                         </div>                                
                                     </article>
                                 </div>                            
@@ -336,26 +358,27 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-5 mt-3 mt-md-0">
                             <div class="tm-bg-white tm-p-4">
-                                <form action="index.html" method="post" class="contact-form">
+                                <form action="message.php" method="post" class="contact-form">
                                     <div class="form-group">
-                                        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
+                                        <input type="text" id="contact_name" name="name" class="form-control" placeholder="Name"  required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
+                                        <input type="email" id="contact_email" name="email" class="form-control" placeholder="Email"  required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" id="contact_subject" name="contact_subject" class="form-control" placeholder="Subject"  required/>
+                                        <input type="text" id="contact_subject" name="subject" class="form-control" placeholder="Subject"  required/>
                                     </div>
                                     <div class="form-group">
-                                        <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="Message" required></textarea>
+                                        <textarea id="contact_message" name="message" class="form-control" rows="9" placeholder="Message" required></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary tm-btn-primary">Send Message Now</button>
+                                    <button type="submit" name="send_msg" class="btn btn-primary tm-btn-primary">Send Message Now</button>
                                 </form>
                             </div>                            
                         </div>
                     </div>        
                 </div>
             </div>
+           
             
             <footer class="tm-bg-dark-blue">
                 <div class="container">
@@ -531,7 +554,11 @@
             }
             //check panel-admin click end------------------------------------------
 
-        </script>             
+        </script>  
+        
+        
+     
+
 
 </body>
 </html>

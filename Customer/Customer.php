@@ -449,7 +449,31 @@
         
                  
          //end update account function
- }
+        }
+
+          //send Message
+          public function sendMessage($name, $email, $subject, $message)
+          {
+              require_once 'Database.php';
+              $conn = new Database();
+              $db = $conn->db();
+  
+             // $current_date_time = date("Y-m-d H:i:s");
+  
+              $stmt = $db->prepare("INSERT INTO messages (email, name, subject, message) VALUES (?,?,?,?)");
+              $stmt->bind_param("ssss", $email,$name, $subject, $message);
+              
+              if($stmt->execute())
+              {
+                  echo'<script>
+                          location.replace("message.php?success=true");
+                      </script>';
+              }else{
+                  echo'<script>
+                          location.replace("message.php?failed=true");
+                      </script>';
+              }
+          }
 
 
     }

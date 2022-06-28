@@ -16,7 +16,7 @@
                         <i data-feather="briefcase" width="20"></i> 
                         <span>Manage Bookings</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="messages.php" class='sidebar-link'>
                         <i data-feather="inbox" width="20"></i> 
                         <span>Messages</span>
                     </a>
@@ -28,7 +28,7 @@
                         <i data-feather="file-text" width="20"></i> 
                         <span>Manage Payments</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="manage_admins.php" class='sidebar-link'>
                         <i data-feather="user" width="20"></i> 
                         <span>Manage Admins</span>
                     </a>

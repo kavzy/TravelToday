@@ -162,6 +162,41 @@
                  }
              }
 
+                   //check user email exists function
+                   public function checkAdminEmailExists($email)
+                   {   
+                       require_once '../Database.php';
+                       $conn = new Database();
+                       $db = $conn->db();
+                       $query = $db->query("SELECT email FROM users WHERE email = '$email'");
+                       if($query->num_rows == 1)
+                       {
+                           return TRUE;
+           
+                       }else{
+           
+                           return FALSE;
+                       }
+                   }
+                   //end check user email exists function
+           
+                   //check user email exists funtion
+                   public function checkAdminUsernameExists($username)
+                   {   
+                       require_once '../Database.php';
+                       $conn = new Database();
+                       $db = $conn->db();
+                       $query = $db->query("SELECT username FROM users WHERE username = '$username'");
+                       if($query->num_rows == 1)
+                       {
+                           return TRUE;
+           
+                       }else{
+           
+                           return FALSE;
+                       }
+                   }
+
 
         //hashing password function
         public function ownHash($password)
@@ -704,5 +739,78 @@
                      
              //end update account function
      }
+
+       //admin account create function
+       public function adminCreateAccount($firstname, $lastname, $email, $username, $address,$mobile, $password)
+       {
+                    require_once '../Database.php';
+                    $conn = new Database();
+                    $db = $conn->db();
+       
+                   $is_username_exists = $this->checkAdminUsernameExists($username);
+                   $is_email_exists = $this->checkAdminEmailExists($email);
+       
+                    //prepare and bind
+                    $hashPass = $this->ownHash($password);
+       
+                   if(!$is_username_exists){
+                       if(!$is_email_exists){
+       
+                           $stmt = $db->prepare("INSERT INTO users (first_name, last_name, email, username, password, address, mobile) VALUES (?,?,?,?,?,?,?)");
+                           $stmt->bind_param("sssssss", $firstname, $lastname, $email, $username, $hashPass, $address, $mobile);
+                           
+                           if($stmt->execute())
+                           {
+                               $role_userid = $stmt->insert_id;
+                               $role = 1;
+
+                               //update role
+                               $stmt1 = $db->prepare("INSERT INTO role_users (role_id, user_id) VALUES (?,?)");
+                               $stmt1->bind_param("ss", $role, $role_userid);
+               
+                               if($stmt1->execute()){
+
+                                   $stmt->close();
+                                   $stmt1->close();
+
+                                 /*  echo'<script>
+                                        location.replace("create_account.php?success=true");
+                                       </script>'; */
+
+                                   echo'<script>
+                                       location.replace("add_admin.php?success=true");
+                                      </script>';
+
+
+                               }
+                            }else{
+                                   echo'<script>
+                                       location.replace("add_admin.php?failed=true");
+                                       </script>';
+               
+                                    }
+       
+                       }else{
+       
+                           echo'<script>
+                           location.replace("add_admin.php?email=false");
+                           </script>';
+       
+                       }
+       
+                   }else{
+       
+                       echo'<script>
+                       location.replace("add_admin.php?username=false");
+                       </script>';
+       
+                   }
+                   
+                    // prepare and bind
+                  
+                  
+                           
+                   //end update account function
+       }
 }
 ?>

@@ -36,11 +36,11 @@
                         <i data-feather="grid" width="20"></i> 
                         <span>Manage Packages</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="report.php" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Generate Report</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="settings.php" class='sidebar-link'>
                         <i data-feather="settings" width="20"></i> 
                         <span>Account Settings</span>
                     </a>

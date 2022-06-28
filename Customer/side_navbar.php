@@ -9,7 +9,7 @@
                 <li class="sidebar-item  ">
 
                     <a href="../index.php" class='sidebar-link'>
-                        <i data-feather="briefcase" width="20"></i> 
+                        <i data-feather="home" width="20"></i> 
                         <span>Home Page</span>
                     </a>
                     <a href="dashboard.php" class='sidebar-link'>
@@ -24,7 +24,7 @@
                         <i data-feather="file-text" width="20"></i> 
                         <span>My Payments History</span>
                     </a>
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="settings.php" class='sidebar-link'>
                         <i data-feather="settings" width="20"></i> 
                         <span>Account Settings</span>
                     </a>

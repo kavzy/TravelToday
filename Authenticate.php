@@ -19,7 +19,7 @@
 
             while($current_user = $query->fetch_assoc())
             {
-                if($current_user['is_active'] == 0){
+                if($current_user['total'] == 1 && $current_user['is_active'] == 0){
                     echo '<p class="d-flex justify-content-center links" style="color:red; text-align:center;">Your account is inactivated. Please contact Admin.</p>';
                     die;
                 }
@@ -35,7 +35,12 @@
                     if($current_user['role_id'] == 1){
                         header("Location: Admin/dashboard.php");
                     }elseif($current_user['role_id'] == 2){
+                        if(isset($_SESSION['pkgid'])){
+                            $pkgid = $_SESSION['pkgid'];
+                            header("Location: booking.php?id=$pkgid");
+                        }else{
                         header("Location: Customer/dashboard.php");
+                        }
                     }else{
                         header("Location: denied.php");
                         die;
@@ -205,6 +210,8 @@
         
                      //prepare and bind
                      $hashPass = $this->ownHash($password);
+
+                     $pkgid = $_SESSION['pkgid'];
         
                     if(!$is_username_exists){
                         if(!$is_email_exists){
@@ -222,12 +229,23 @@
                                 $stmt1->bind_param("ss", $role, $role_userid);
                 
                                 if($stmt1->execute()){
+                                    $_SESSION['id'] = $stmt->insert_id;
+                                    $_SESSION['username'] = $username;
+                                    $_SESSION['role_id'] = $role;
+                                    $_SESSION['is_logged'] = TRUE;
+
                                     $stmt->close();
                                     $stmt1->close();
 
-                                    echo'<script>
+                                  /*  echo'<script>
                                          location.replace("create_account.php?success=true");
-                                        </script>';
+                                        </script>'; */
+
+                                    echo'<script>
+                                        location.replace("booking.php?id='.$pkgid.'&success=true");
+                                       </script>';
+
+
                                 }
                              }else{
                                     echo'<script>

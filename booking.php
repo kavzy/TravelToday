@@ -5,6 +5,7 @@
 if (isset($_GET['id'])){ 
     if(is_numeric($_GET['id'])){
         $pkg_id = $_GET['id'];
+        $_SESSION['pkgid'] = $pkg_id;
     }else{
         ?>
         <script>
@@ -385,7 +386,27 @@ if (isset($_GET['id'])){
             }
             //check panel-admin click end------------------------------------------
 
-        </script>             
+        </script>  
+        
+         <!-- Sweet Alert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<?php
+
+  if(isset($_GET['success']))
+           {
+               echo'<script>
+                       swal("Account Created Success!", "Now You can book your package!", "success");
+                   </script>';
+        
+           }
+           if(isset($_GET['failed']))
+           {
+               echo'<script>
+                       swal("Account Created Fail!!", "Something went wrong!", "error");
+                   </script>'; 
+           }
+
+  ?>
 
 </body>
 </html>

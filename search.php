@@ -100,7 +100,7 @@ if (isset($_POST['search'])){
                     <polygon fill="#ee5057" points="0,0  100,0  50,60"></polygon>                   
                 </svg> 
                 <div class="container tm-pt-5 tm-pb-4"> 
-                    <center><h4>Search Results</h4></center>
+                    <center><h4><font color="red">Search Results</font> - Location - <?php echo $search; ?> | Rooms -  <?php echo $rooms; ?> </h4> </center>
                     <div class="row">
                                 <?php
                                     require_once 'Database.php';

@@ -43,14 +43,15 @@ if (isset($_GET['id'])){
     
         <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
         <link rel="stylesheet" href="../assets/css/app.css">
-        <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
+        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
 </head>
 <body>
     <div id="app">
         <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
     <div class="sidebar-header">
-        <img src="../assets/images/logo.svg" alt="" srcset="">
+    <center><img src="../img/logo.png" alt="" srcset=""></center>
+        <center><h4>Travel Today</h4></center>
     </div>
       <!-- Sidenav -->
     <?php include "side_navbar.php" ?>

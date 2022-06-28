@@ -101,6 +101,55 @@
         }
         //end check user email exists
 
+             //check user email exists function
+             public function checkEmailExists2($email, $user_id)
+             {   
+                 require_once '../Database.php';
+                 $conn = new Database();
+                 $db = $conn->db();
+                 $query = $db->query("SELECT email FROM users WHERE email = '$email'");
+                 if($query->num_rows == 1)
+                 {
+                    $query2 = $db->query("SELECT email FROM users WHERE email ='$email' AND id = '".$user_id."'");
+                    if($query2->num_rows == 1)
+                    {
+                        return FALSE;
+     
+                    }else{
+                         return TRUE;
+                    }
+     
+                 }else{
+     
+                     return FALSE;
+                 }
+             }
+             //end check user email exists function
+     
+             //check user email exists funtion
+             public function checkUsernameExists2($username, $user_id)
+             {   
+                 require_once '../Database.php';
+                 $conn = new Database();
+                 $db = $conn->db();
+                 $query = $db->query("SELECT username FROM users WHERE username = '$username'");
+                 if($query->num_rows == 1)
+                 {
+                    $query2 = $db->query("SELECT username FROM users WHERE username ='$username' AND id = '".$user_id."'");
+                    if($query2->num_rows == 1)
+                    {
+                        return FALSE;
+     
+                    }else{
+                         return TRUE;
+                    }
+     
+                 }else{
+     
+                     return FALSE;
+                 }
+             }
+
 
         //hashing password function
         public function ownHash($password)
@@ -290,6 +339,117 @@
                       </script>';
               }
           }
+
+          
+        //settings account update function
+        public function settings($firstName, $lastName, $email, $username, $address,$mobile, $userid)
+        {
+             require_once '../Database.php';
+             $conn = new Database();
+             $db = $conn->db();
+
+            $is_username_exists = $this->checkUsernameExists2($username, $userid);
+            $is_email_exists = $this->checkEmailExists2($email, $userid);
+
+            if(!$is_username_exists){
+                if(!$is_email_exists){
+
+                    $stmt = $db->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, username = ?, address = ?, mobile = ? WHERE id='".$userid."'");
+                    $stmt->bind_param("ssssss", $firstName, $lastName, $email, $username,$address, $mobile);
+                    
+                    if($stmt->execute())
+                    {
+                         
+                        $stmt->close();
+        
+                        echo'<script>
+                                location.replace("settings.php?success=true");
+                               </script>';
+                     }else{
+                            echo'<script>
+                                location.replace("settings.php?failed=true");
+                                </script>';
+        
+                             }
+
+                }else{
+
+                    echo'<script>
+                    location.replace("settings.php?email=false");
+                    </script>';
+
+                }
+
+            }else{
+
+                echo'<script>
+                location.replace("settings.php?username=false");
+                </script>';
+
+            }
+            
+             // prepare and bind
+           
+           
+                    
+            //end update account function
+    }
+
+     //settings account update function
+     public function settings_with_pass($firstName, $lastName, $email, $username,$password,$address,$mobile, $userid)
+     {
+          require_once '../Database.php';
+          $conn = new Database();
+          $db = $conn->db();
+
+          $newpassword = $this->ownHash($password);
+
+         $is_username_exists = $this->checkUsernameExists2($username, $userid);
+         $is_email_exists = $this->checkEmailExists2($email, $userid);
+
+         if(!$is_username_exists){
+             if(!$is_email_exists){
+
+                 $stmt = $db->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, username = ?, password = ?, address = ?, mobile = ? WHERE id='".$userid."'");
+                 $stmt->bind_param("sssssss", $firstName, $lastName, $email, $username , $newpassword, $address, $mobile);
+                 
+                 if($stmt->execute())
+                 {
+                      
+                     $stmt->close();
+     
+                     echo'<script>
+                             location.replace("settings.php?success=true");
+                            </script>';
+                  }else{
+                         echo'<script>
+                             location.replace("settings.php?failed=true");
+                             </script>';
+     
+                          }
+
+             }else{
+
+                 echo'<script>
+                 location.replace("settings.php?email=false");
+                 </script>';
+
+             }
+
+         }else{
+
+             echo'<script>
+             location.replace("settings.php?username=false");
+             </script>';
+
+         }
+         
+          // prepare and bind
+        
+        
+                 
+         //end update account function
+ }
 
 
     }
